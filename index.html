@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+    <!-- Replace the content tag with appropriate information -->
+    <meta name="description"
+          content="MoRF avatars are created from short monocular videos and can be rendered in real-time (30+ FPS, 640x640px) on mobile devices">
+    <meta property="og:title" content="VisDiff: SDF-Guided Polygon Generation for Visibility Reconstruction and Recognition"/>
+    <meta property="og:description"
+          content="VisDiff: SDF-Guided Polygon Generation for Visibility Reconstruction and Recognition"/>
+    <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+    <meta property="og:image" content="static/image/your_banner_image.png"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+
+
+    <meta name="twitter:title" content="VisDiff: SDF-Guided Polygon Generation for Visibility Reconstruction and Recognition">
+    <meta name="twitter:description"
+          content="MoRF avatars are created from short monocular videos and can be rendered in real-time (30+ FPS, 640x640px) on mobile devices">
+    <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+    <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- Keywords for your paper to be indexed by-->
+    <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>VisDiff: SDF-Guided Polygon Generation for Visibility Reconstruction and Recognition</title>
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="static/css/bulma.min.css">
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="static/css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+    <script defer src="static/js/fontawesome.all.min.js"></script>
+    <script src="static/js/bulma-carousel.min.js"></script>
+    <script src="static/js/bulma-slider.min.js"></script>
+    <script src="static/js/index.js"></script>
+</head>
+
+<body>
+
+<section class="hero">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h1 class="title is-1 publication-title">
+                        <a style="color:black;">VisDiff: SDF-Guided Polygon Generation for Visibility Reconstruction and Recognition</a>
+                    </h1>
+                    <div class="is-size-5 publication-authors">
+                        <!-- Paper authors -->
+                        <span class="author-block">
+                            <div class="author-portrait">
+                              <img class="img-fluid mb-3" src="static/images/avatar/rahul.jpg" alt="">
+                            </div>
+                            <a href="https://scholar.google.com/citations?user=aj9y-r8AAAAJ&hl=en" target="_blank">Rahul<br>Moorthy</a>
+                        </span>
+
+                        <span class="author-block">
+                            <div class="author-portrait">
+                              <img class="img-fluid mb-3" src="static/images/avatar/volkan.jpg" alt="">
+                            </div>
+                            <a href="https://scholar.google.com/citations?user=Q5KT-hEAAAAJ&hl=en" target="_blank">Volkan<br>Isler</a>
+                        </span>
+                    </div>
+
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block">Robotic Sensor Network Lab, University of Minnesota</span>
+                    </div>
+
+                    <!-- ArXiv Link -->
+                    <span class="link-block">
+                    <a href="http://arxiv.org/abs/2410.05530" target="_blank"
+                       class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="ai ai-arxiv"></i>
+                        </span>
+                        <span>Arxiv</span>
+                    </a>
+                    </span>
+
+                    <!-- <span class="link-block">
+                    <a href="https://drive.google.com/drive/folders/1CulaZ5ZJniKtuIr2d32VLMfZ5y1v8XRp?usp=sharing" target="_blank"
+                       class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="ai ai-arxiv"></i>
+                        </span>
+                        <span>Polygon Dataset (Coming Soon)</span>
+                    </a>
+                    </span> -->
+
+                    <!-- Github link -->
+                    <!-- <span class="link-block">
+                    <a href="https://github.umn.edu/MAHES092/VisDiff" target="_blank"
+                       class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Github (Coming Soon)</span>
+                    </a>
+                    </span> -->
+
+                    <!-- Github link for controller workspace-->
+
+                    <br>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero teaser">
+    <div class="container is-max-desktop">
+        <div class="hero-body">
+            <div class="container">
+                The capability to learn latent representations plays a key role in the effectiveness of recent machine learning methods. An active frontier in representation learning
+                is understanding representations for combinatorial structures which may not
+                admit well-behaved local neighborhoods or distance functions. For example, for
+                polygons, slightly perturbing vertex locations might lead to significant changes in
+                their combinatorial structure (expressed as their triangulation or visibility graph)
+                and may even lead to invalid polygons. In this paper, we investigate representations
+                to capture the underlying combinatorial structures of polygons. Specifically,
+                we study the open problem of Visibility Reconstruction: Given a visibility graph
+                G, construct a polygon P whose visibility graph is G. Visibility Reconstruction
+                belongs to the Existential Theory of Reals (∃R) complexity class (which lies between NP and P-SPACE).
+                Currently, reconstruction algorithms are available only for specific polygon classes. Establishing the hardness of the general problem is
+                open.
+
+
+                <p>We introduce <strong>VisDiff</strong>, a novel diffusion-based approach to reconstruct a polygon
+                from its given visibility graph G. Our method first estimates the signed distance
+                function (SDF) of P from G. Afterwards, it extracts ordered vertex locations
+                that have the pairwise visibility relationship given by the edges of G. Our main
+                insight is that going through the SDF significantly improves learning for reconstruction. In order to train VisDiff, we make two main contributions: (1) We
+                design novel loss components for computing the visibility in a differentiable manner and (2) create a carefully curated dataset. We use this dataset to benchmark
+                our method and achieve 21% improvement in F1-Score over standard methods.
+                We also demonstrate effective generalization to out-of-distribution polygon types
+                and show that learning a generative model allows us to sample the set of polygons with a given visibility graph. Finally, we extend our method to the related
+                combinatorial problem of reconstruction from a triangulation. We achieve 95%
+                classification accuracy of triangulation edges and a 4% improvement in Chamfer
+                distance compared to current architectures. Lastly, we provide preliminary results
+                on the harder visibility graph recognition problem in which the input G is not
+                guaranteed to be a visibility graph.</p>
+                <br>
+                <br>
+            </div>
+            <div class="container" style="text-align:center;">
+                <img src="static/images/visibility_graph_recog.png" alt="Main Idea" style="text-align:center;width:900px;"/>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Teaser video-->
+<section class="hero teaser">
+    <div class="container is-max-desktop">
+        <div class="hero-body">
+
+            <h2 class="title has-text-centered">Diffusion Visualization</h2>
+
+            <div style="text-align: center;">
+                <video poster="" id="demo1" autoplay controls muted loop playsinline width="85%" height="75%">
+                    <source src="./static/videos/diffusion_process_visualization.mp4" type="video/mp4">
+                </video>
+            </div>
+            <!-- End image carousel -->
+        </div>
+    </div>
+</section>
+<section class="hero teaser">
+    <div class="container is-max-desktop">
+        <h2 class="title has-text-centered">Qualitative Results</h2>
+        <div class="container" style="text-align:center;">
+            <img src="static/images/Qualitative_Diffusion.png" alt="Main Idea" style="text-align:center;width:900px;"/>
+        </div>
+    </div>
+</section>
+
+
+</body>
+</html>
