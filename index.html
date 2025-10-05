@@ -55,7 +55,7 @@
             <div class="columns is-centered">
                 <div class="column has-text-centered">
                     <h1 class="title is-1 publication-title">
-                        <a style="color:black;">VisDiff: SDF-Guided Polygon Generation for Visibility Reconstruction and Recognition</a>
+                        <a style="color:black;">VisDiff: SDF-Guided Polygon Generation for Visibility Reconstruction, Characterization and Recognition</a>
                     </h1>
                     <div class="is-size-5 publication-authors">
                         <!-- Paper authors -->
@@ -68,6 +68,13 @@
 
                         <span class="author-block">
                             <div class="author-portrait">
+                              <img class="img-fluid mb-3" src="static/images/avatar/junjee.jpg" alt="">
+                            </div>
+                            <a href="https://scholar.google.com/citations?user=Ld7f0b0AAAAJ&hl=en&oi=ao" target="_blank">JJ<br>Chao</a>
+                        </span>
+
+                        <span class="author-block">
+                            <div class="author-portrait">
                               <img class="img-fluid mb-3" src="static/images/avatar/volkan.jpg" alt="">
                             </div>
                             <a href="https://scholar.google.com/citations?user=Q5KT-hEAAAAJ&hl=en" target="_blank">Volkan<br>Isler</a>
@@ -75,7 +82,10 @@
                     </div>
 
                     <div class="is-size-5 publication-authors">
-                        <span class="author-block">Robotic Sensor Network Lab, University of Minnesota</span>
+                        <span class="author-block">Robotic Sensor Network Lab, University of Minnesota / UT Austin</span>
+                    </div>
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block"><em>Accepted at <strong>Neurips 2025</strong> </em></span>
                     </div>
 
                     <!-- ArXiv Link -->
@@ -121,49 +131,237 @@
 </section>
 
 <section class="hero teaser">
+    <h2 class="title has-text-centered">Abstract</h2>
     <div class="container is-max-desktop">
         <div class="hero-body">
             <div class="container">
-                The capability to learn latent representations plays a key role in the effectiveness of recent machine learning methods. An active frontier in representation learning
-                is understanding representations for combinatorial structures which may not
-                admit well-behaved local neighborhoods or distance functions. For example, for
-                polygons, slightly perturbing vertex locations might lead to significant changes in
-                their combinatorial structure (expressed as their triangulation or visibility graph)
-                and may even lead to invalid polygons. In this paper, we investigate representations
-                to capture the underlying combinatorial structures of polygons. Specifically,
-                we study the open problem of Visibility Reconstruction: Given a visibility graph
-                G, construct a polygon P whose visibility graph is G. Visibility Reconstruction
-                belongs to the Existential Theory of Reals (∃R) complexity class (which lies between NP and P-SPACE).
-                Currently, reconstruction algorithms are available only for specific polygon classes. Establishing the hardness of the general problem is
-                open.
-
-
-                <p>We introduce <strong>VisDiff</strong>, a novel diffusion-based approach to reconstruct a polygon
-                from its given visibility graph G. Our method first estimates the signed distance
-                function (SDF) of P from G. Afterwards, it extracts ordered vertex locations
-                that have the pairwise visibility relationship given by the edges of G. Our main
-                insight is that going through the SDF significantly improves learning for reconstruction. In order to train VisDiff, we make two main contributions: (1) We
-                design novel loss components for computing the visibility in a differentiable manner and (2) create a carefully curated dataset. We use this dataset to benchmark
-                our method and achieve 21% improvement in F1-Score over standard methods.
-                We also demonstrate effective generalization to out-of-distribution polygon types
-                and show that learning a generative model allows us to sample the set of polygons with a given visibility graph. Finally, we extend our method to the related
-                combinatorial problem of reconstruction from a triangulation. We achieve 95%
-                classification accuracy of triangulation edges and a 4% improvement in Chamfer
-                distance compared to current architectures. Lastly, we provide preliminary results
-                on the harder visibility graph recognition problem in which the input G is not
-                guaranteed to be a visibility graph.</p>
+                The ability to capture rich representations of combinatorial structures has enabled the application of machine learning to tasks such as analysis and generation of floorplans, terrains, images, and animations. Recent work has primarily focused on understanding structures with well-defined features, neighborhoods, or underlying distance metrics, while those lacking such characteristics remain largely unstudied. Examples of these combinatorial structures can be found in polygons, where a small change in the vertex locations causes a significant rearrangement of the combinatorial structure, expressed as a visibility or triangulation graphs. Current representation learning approaches fail to capture structures without well-defined features and distance metrics.
+                <p>In this paper, we study the open problem of <strong>Visibility Reconstruction</strong> : Given a visibility graph <em><strong>G</strong></em>, construct a polygon <em><strong>P</strong></em> whose visibility graph is  <em><strong>G</strong></em>. We introduce <em><strong>VisDiff</strong></em>, a novel diffusion-based approach to generate polygon from the input visibility graph . The main novelty of our approach is that, rather than generating the polygon's vertex set directly, we first estimate the signed distance function (SDF) associated with the polygon. The SDF is then used to extract the vertex location representing the final polygon. We show that going through the SDF allows to learn the visibility relationship much more effectively than generating vertex locations directly. In order to train , we create a carefully curated dataset. We use this dataset to benchmark our method and achieve <strong>26%</strong> improvement in F1-Score over standard methods as well as state of the art approaches. We also provide preliminary results on the harder visibility graph recognition problem in which the input is not guaranteed to be a visibility graph. To demonstrate the applicability of VisDiff beyond visibility graphs, we extend it to the related combinatorial structure of triangulation graph. Lastly, leveraging these capabilties, we show that VisDiff can perform high-diversity sampling over the space of all polygons. In particular, we highlight its ability to perform both polygon-to-polygon interpolation and graph-to-graph interpolation, enabling diverse sampling across the polygon space.</p>
                 <br>
-                <br>
-            </div>
+                <section class="hero teaser">
+    
+    <div class="container is-max-desktop">
+        <div class="hero-body">
+
+            <!-- <h2 class="title has-text-centered">Problem</h2> -->
+
             <div class="container" style="text-align:center;">
-                <img src="static/images/visibility_graph_recog.png" alt="Main Idea" style="text-align:center;width:900px;"/>
+                <img src="static/images/problem.png" alt="Main Idea" style="text-align:center;width:900px;"/>
+            </div>
+            <!-- End image carousel -->
+        </div>
+    </div>
+</section>
             </div>
         </div>
     </div>
 </section>
 
+<section class="hero teaser">
+    <div class="container is-max-desktop">
+        <div class="hero-body">
+
+            <h2 class="title has-text-centered">Architecture</h2>
+            <br>
+            <p>
+  <strong>VisDiff Architecture</strong> consists of two main components: a 
+  <em>U-Net SDF Diffusion block</em> and a <em>Vertex Extraction block</em>. 
+  The diffusion block takes a noisy signed distance function (SDF) sampled from a Gaussian distribution 
+  and iteratively denoises it through transformer cross-attention, where spatial CNN features act as queries 
+  and the input visibility graph provides keys and values. From the recovered clean SDF, an initial vertex set 
+  is extracted via contouring. The vertex extraction block then refines these vertices by combining pixel-aligned 
+  and global SDF features to predict the final polygon structure. The model is trained with supervision from both 
+  ground-truth SDFs and polygons, while at test time it requires only the visibility graph as input.
+</p>
+<br>
+            <div class="container" style="text-align:center;">
+                <img src="static/images/visdiff.png" alt="Architecture" style="text-align:center;width:800px;"/>
+            </div>
+            <!-- End image carousel -->
+        </div>
+    </div>
+</section>
+
+<section class="results">
+  <style>
+    .results { max-width: 900px; margin: 1.5rem auto; padding: 0 1rem; }
+    .results .table-wrap { overflow-x: auto; }
+    table.metrics {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      font-size: 0.95rem;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .metrics caption {
+      text-align: left;
+      font-weight: 600;
+      padding: 0.9rem 1rem;
+      background: #f8fafc;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .metrics th, .metrics td { padding: 0.7rem 0.9rem; white-space: nowrap; }
+    .metrics thead th {
+      text-align: left;
+      background: #f9fafb;
+      font-weight: 600;
+      color: #111827;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .metrics tbody tr:nth-child(even) td { background: #fbfdff; }
+    .metrics td.metric { text-align: right; font-variant-numeric: tabular-nums; }
+    .metrics tbody tr:hover td { background: #f3f7ff; }
+    .model { font-weight: 600; color: #111827; }
+    .ref { color: #6b7280; font-weight: 500; }
+  </style>
+
 <!-- Teaser video-->
 <section class="hero teaser">
+    <div class="container is-max-desktop">
+        <div class="hero-body">
+
+            <h2 class="title has-text-centered">Dataset</h2>
+            <br>
+            <p>
+  We study visibility characterization and reconstruction, which require datasets where multiple polygons map 
+  to the same visibility graph and where graph diversity is high. No existing dataset satisfies these properties. 
+  To address this, we generate 60,000 polygons with 25 vertices, sampled uniformly in [-1,1]<sup>2</sup> and arranged 
+  anticlockwise using the 2-opt algorithm. 2-opt move algorithm exhibited non-uniformity with
+respect to the link diameter of the visibility graph. Hence, we rebalance the dataset by resampling based on link diameter.
+</p>
+<br>
+
+            <div class="container" style="text-align:center;">
+                <img src="static/images/dataset_properties.png" alt="dataset" style="text-align:center;width:800px;"/>
+            </div>
+            <!-- End image carousel -->
+        </div>
+    </div>
+</section>
+
+<h5 class="title has-text-centered">Quantitative Metrics and Qualitative Results</h5>
+<br>
+<div class="table-wrap">
+<p>
+  We compare <strong>VisDiff</strong> with baselines on the visibility reconstruction problem on the test split of the curated dataset. We evaluate based on the F-1 score between the visibility graph of the generated polygon 
+  and that of the ground truth polygon.
+</p>
+<br>
+  <table class="metrics" aria-describedby="results-caption">
+    <!-- <caption id="results-caption">Baseline Comparison (higher is better ↑, lower is better ↓)</caption> -->
+    <thead>
+      <tr>
+        <th>Method</th>
+        <th>Acc ↑</th>
+        <th>Prec ↑</th>
+        <th>Rec ↑</th>
+        <th>F1 ↑</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="model">(a) Vertex Diffusion</span> <span class="ref">[41]</span></td>
+        <td class="metric">0.777</td>
+        <td class="metric">0.773</td>
+        <td class="metric">0.716</td>
+        <td class="metric">0.724</td>
+      </tr>
+      <tr>
+        <td><span class="model">(b) Variational Autoencoder</span> <span class="ref">[42]</span></td>
+        <td class="metric">0.740</td>
+        <td class="metric">0.718</td>
+        <td class="metric">0.704</td>
+        <td class="metric">0.702</td>
+      </tr>
+      <tr>
+        <td><span class="model">(c) Graph Neural Network</span> <span class="ref">[43]</span></td>
+        <td class="metric">0.730</td>
+        <td class="metric">0.786</td>
+        <td class="metric">0.686</td>
+        <td class="metric">0.674</td>
+      </tr>
+      <tr>
+        <td><span class="model">(d) VisDiff</span></td>
+        <td class="metric"><strong>0.924</strong></td>
+        <td class="metric"><strong>0.914</strong></td>
+        <td class="metric"><strong>0.911</strong></td>
+        <td class="metric"><strong>0.912</strong></td>
+      </tr>
+      <tr>
+        <td><span class="model">(e) MeshGPT</span> <span class="ref">[9]</span></td>
+        <td class="metric">0.747</td>
+        <td class="metric">0.739</td>
+        <td class="metric">0.723</td>
+        <td class="metric">0.712</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</section>
+
+<section class="hero teaser">
+    
+    <div class="container is-max-desktop">
+        <div class="hero-body">
+        <!-- <h5 class="title is-5 has-text-centered">Qualitative Results</h5> -->
+        <div class="container" style="text-align:center;">
+            <img src="static/images/Qualitative_Diffusion.png" alt="Main Idea" style="text-align:center;width:900px;"/>
+        </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="hero teaser">
+    <div class="container is-max-desktop">
+        <div class="hero-body">
+
+            <h2 class="title has-text-centered">Interpolation Visualization</h2>
+            <br>
+            <p>We demonstrate VisDiff’s diversity with two interpolations: <strong>polygon-to-polygon</strong>, where we fix a visibility graph and linearly interpolate between two diffusion seeds over 50 steps to obtain valid intermediate polygons; and <strong>graph-to-graph</strong>, where we move along a flip-graph path between two valid triangulations and generate smooth intermediate polygon sequences.</p>
+            <br>
+            <h6 class="title is-6 has-text-centered">Graph-to-Graph Interpolation</h6>
+            <div style="text-align: center;">
+                <video poster="" id="demo1" autoplay controls muted loop playsinline width="110%" height="110%">
+                    <source src="./static/videos/polygon_interpolation_experiment.mp4" type="video/mp4">
+                </video>
+            </div>
+            <br>
+            <h6 class="title is-6 has-text-centered">Polygon-to-Polygon Interpolation</h6>
+            <div style="text-align: center;">
+                <video poster="" id="demo1" autoplay controls muted loop playsinline width="110%" height="110%">
+                    <source src="./static/videos/noise_interpolation.mp4" type="video/mp4">
+                </video>
+            </div>
+            <!-- End image carousel -->
+        </div>
+    </div>
+</section>
+
+<section class="hero teaser">
+    <div class="container is-max-desktop">
+        <div class="hero-body">
+
+            <h2 class="title has-text-centered">Applications</h2>
+            <br>
+            <div class="content">
+  <ul>
+    <li><strong>Navigation benchmark in high-occlusion settings:</strong> using the VisDiff dataset as a navigation benchmark to evaluate motion planners in high occlusion settings.</li>
+    <li><strong>Polygon data augmentation:</strong> sample diverse, valid polygons conditioned on graph structure.</li>
+    <li><strong>Privacy-aware floorplan generation:</strong> The finding of this work can be used to incorporate room-to-room visibility (visibility graph analysis) into polygon-based floorplan models to balance connectivity and privacy.</li>
+  </ul>
+</div>
+            
+            <!-- End image carousel -->
+        </div>
+    </div>
+</section>
+<!-- Teaser video-->
+<!-- <section class="hero teaser">
     <div class="container is-max-desktop">
         <div class="hero-body">
 
@@ -174,35 +372,12 @@
                     <source src="./static/videos/diffusion_process_visualization.mp4" type="video/mp4">
                 </video>
             </div>
-            <!-- End image carousel -->
         </div>
     </div>
-</section>
+</section> -->
 
-<section class="hero teaser">
-    <div class="container is-max-desktop">
-        <div class="hero-body">
 
-            <h2 class="title has-text-centered">Interpolation Visualization</h2>
 
-            <div style="text-align: center;">
-                <video poster="" id="demo1" autoplay controls muted loop playsinline width="110%" height="110%">
-                    <source src="./static/videos/interpolation_experiment.mp4" type="video/mp4">
-                </video>
-            </div>
-            <!-- End image carousel -->
-        </div>
-    </div>
-</section>
-
-<section class="hero teaser">
-    <div class="container is-max-desktop">
-        <h2 class="title has-text-centered">Qualitative Results</h2>
-        <div class="container" style="text-align:center;">
-            <img src="static/images/Qualitative_Diffusion.png" alt="Main Idea" style="text-align:center;width:900px;"/>
-        </div>
-    </div>
-</section>
 
 
 </body>
