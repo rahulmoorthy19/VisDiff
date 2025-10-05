@@ -230,14 +230,56 @@
   to the same visibility graph and where graph diversity is high. No existing dataset satisfies these properties. 
   To address this, we generate 60,000 polygons with 25 vertices, sampled uniformly in [-1,1]<sup>2</sup> and arranged 
   anticlockwise using the 2-opt algorithm. 2-opt move algorithm exhibited non-uniformity with
-respect to the link diameter of the visibility graph. Hence, we rebalance the dataset by resampling based on link diameter.
+respect to the link diameter of the visibility graph. Hence, we rebalance the dataset by resampling based on link diameter resulting in 18,500 polygons. 
+We additionally create 20 augmentations for each polygon, with each augmentation having the characteristic of multiple polygons with the same visibility graph, thereby producing 370,000 polygons.
 </p>
 <br>
 
-            <div class="container" style="text-align:center;">
+            <!-- <div class="container" style="text-align:center;">
                 <img src="static/images/dataset_properties.png" alt="dataset" style="text-align:center;width:800px;"/>
-            </div>
+            </div> -->
             <!-- End image carousel -->
+
+            <div class="container is-max-desktop">
+  <div class="columns is-vcentered">
+    <div class="column is-two-thirds has-text-centered">
+      <img src="static/images/dataset_properties.png" alt="dataset" style="width:800px;" />
+    </div>
+    <div class="column is-one-third">
+      <table class="table is-bordered is-striped is-narrow is-fullwidth" style="font-size:0.9rem; min-width:280px;">
+        <caption class="has-text-centered is-size-6 has-text-weight-semibold" style="caption-side: top; margin-bottom: .5rem;">
+          Comparison to Real-World Datasets
+        </caption>
+        <thead>
+          <tr>
+            <th>Real-World Dataset</th>
+            <th>Average Link Diameter</th>
+            <th>Max Link Diameter</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ours</td>
+            <td><strong>4.4 / 2.2</strong></td>
+            <td><strong>9.0</strong></td>
+          </tr>
+          <tr>
+            <td>MNIST</td>
+            <td>1.83 / 0.50</td>
+            <td>4.1</td>
+          </tr>
+          <tr>
+            <td>COCO 2017</td>
+            <td>1.32 / 0.25</td>
+            <td>3.823</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
         </div>
     </div>
 </section>
